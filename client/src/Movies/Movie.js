@@ -3,11 +3,13 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 export default function Movie(props) {
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState();
   //console.log(movie);
   
   
-  let id = useParams()
+  let params = useParams()
+  let id = params.id
+  console.log(id)
   //console.log(useParams());
   // Change ^^^ that line and use a hook to obtain the :id parameter from the URL
 
@@ -18,7 +20,9 @@ export default function Movie(props) {
         // Study this response with a breakpoint or log statements
         // and set the response data as the 'movie' slice of state
          
-         setMovie(response)
+         setMovie(response.data)
+         console.log(response.data
+          );
       })
       .catch(error => {
         console.error(error);

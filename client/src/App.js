@@ -9,7 +9,7 @@ import Movie from './Movies/Movie'
 export default function App () {
   const [saved, setSaved] = useState([]); // Stretch: the ids of "saved" movies
   const [movieList, setMovieList] = useState([]);
-    console.log(saved);
+    
   useEffect(() => {
     const getMovies = () => {
       axios
@@ -17,7 +17,7 @@ export default function App () {
         .then(response => {
           // Study this response with a breakpoint or log statements
           // and set the response data as the 'movieList' slice of state
-          console.log(response);
+          //console.log(response);
           setMovieList(response.data)
         })
         .catch(error => {
@@ -29,31 +29,28 @@ export default function App () {
 
   const addToSavedList = id => {
     // This is stretch. Prevent the same movie from being "saved" more than once
-    movieList.map(movie => {
-      if(!saved.includes(movie.id)){
-        movieList.push(movie)
-      }
-    })
+    
+    
   };
 
   return (
     <div>
-      <SavedList list={saved} />
+      <SavedList list={[]} />
       <Link to='/'></Link>
-      <Link to='/movies/:id'></Link>
+      <Link to='/movies:id'></Link>
       
       <Switch>
       <Route
-          path='movies/:id' >
-          <Movie movie={movieList}/>
+          path='/movies/:id' >
+          <Movie />
         </Route>
         <Route 
           exact
           path='/' > 
           <MovieList movies={movieList} />
         </Route> 
-       
-      </Switch>
+        </Switch>
+      
     </div>
   );
 }
